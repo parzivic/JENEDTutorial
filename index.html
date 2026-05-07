@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JenEd Tutorial | Building Strong Minds</title>
+    <style>
+        /* --- CSS STYLING --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 8%;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: #3498db; }
+
+        nav ul { display: flex; list-style: none; }
+
+        nav ul li { margin-left: 25px; }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover { color: #3498db; }
+
+        /* Hero / Landing Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 8% 50px 8%;
+            background: #fff;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text { flex: 1; min-width: 300px; }
+
+        .prof-badge {
+            color: #3498db;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30px;
+            box-shadow: 20px 20px 0px #3498db;
+            object-fit: cover;
+        }
+
+        .cta-button {
+            padding: 15px 35px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover { background: #2980b9; transform: translateY(-3px); }
+
+        /* Section Universal Styling */
+        section { padding: 80px 8%; }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: #3498db;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        #about { background: #fdfdfd; }
+
+        .about-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .about-box p { margin-bottom: 20px; }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); border-bottom: 5px solid #3498db; }
+
+        .card h3 { color: #3498db; margin-bottom: 15px; }
+
+        /* Videos Section */
+        #videos { background: #fff; }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info { padding: 20px; }
+
+        .video-info h4 { margin-bottom: 10px; color: #2c3e50; }
+
+        /* Contact Section */
+        #contact { background: #2c3e50; color: white; text-align: center; }
+
+        #contact h2 { color: white; }
+
+        .contact-details { margin-top: 30px; font-size: 1.2rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a252f;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container { flex-direction: column-reverse; text-align: center; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">JenEd <span>Tutorial</span></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="hero-container">
+            <div class="hero-text">
+                <span class="prof-badge">Prof. Jeniel</span>
+                <h1>Building Strong Minds and Brighter Futures</h1>
+                <p>Personalized tutorial services dedicated to helping students excel in Reading, Math, Science, and English.</p>
+                <a href="#contact" class="cta-button">Get Started Today</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://scontent.fmnl4-4.fna.fbcdn.net/v/t39.30808-6/531492476_1449615509678968_7485646694471520677_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeETLF1BOJ1hJ2jhElR_qM7V1M2tMoZB6gTUza0yhkHqBBQl-Pp-5ffYSiV-p9h2RONMgLqthPjAsBv3R5nDYZrX&_nc_ohc=xQdtTMdFP00Q7kNvwHqwmw-&_nc_oc=AdoXLTU73MFhn29FT8eo3iJAf_kv8staYBIbjHjQQDc6kbDVH_mh_5aX5QCpYj62D28&_nc_zt=23&_nc_ht=scontent.fmnl4-4.fna&_nc_gid=7lS-eeUJokgSsPiWwAPvUQ&_nc_ss=7b2a8&oh=00_Af6hFDYtVhrrHohxoVu2bLGnx68UN5pAvniCsnBNF9QNag&oe=6A020EE6" alt="JenEd Tutor">
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>About JenEd</h2>
+        <div class="about-box">
+            <p>At JenEd Tutorial, led by <strong>Prof. Jennifer Ed</strong>, we believe that every child can learn, grow, and succeed with the right guidance and support. Our tutorial center is dedicated to helping students build strong foundations in essential skills they need to excel in school and in life.</p>
+            <p>We provide a safe, supportive, and encouraging learning environment where students feel comfortable to ask questions, make mistakes, and improve step by step.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="card">
+                <h3>Reading</h3>
+                <p>Focusing on comprehension, vocabulary, and fluency so students read with total confidence.</p>
+            </div>
+            <div class="card">
+                <h3>Mathematics</h3>
+                <p>Step-by-step problem-solving techniques to strengthen accuracy and logical thinking.</p>
+            </div>
+            <div class="card">
+                <h3>Science</h3>
+                <p>Connecting complex concepts to real-life situations to make learning meaningful and fun.</p>
+            </div>
+            <div class="card">
+                <h3>English</h3>
+                <p>Building communication skills through practice, conversation, and proper pronunciation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos">
+        <h2>Learning Library</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/18AbhxbJxCMrFfsy4XNiNeP3p0N1xpKAD/preview" allow="autoplay"></iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Introduction to Phonics</h4>
+                    <p>A beginner's guide to understanding letter sounds and blending techniques.</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://drive.google.com/file/d/12fM5TWPrC9p2FDXZqpL9GChaakPYnkwy/preview" allow="autoplay"></iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Math Strategy: Multiplication</h4>
+                    <p>Learning how to visualize numbers to make multiplication faster and easier.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-details">
+            <p>Ready to help your child succeed?</p>
+            <p style="margin-top:20px;"><strong>Email:</strong> hello@jenedtutorial.com</p>
+            <p><strong>Phone:</strong> +63 912 345 6789</p>
+            <p><strong>Location:</strong> Pagadian City, Zamboanga Peninsula</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 JenEd Tutorial Center. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
